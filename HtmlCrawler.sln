@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlCrawler", "HtmlCrawler\HtmlCrawler.csproj", "{267E95D7-4669-45E4-92D1-E147289593EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operations", "Operations\Operations.csproj", "{B8514AE1-FF9A-44F5-BBCE-F38747D10711}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{8EAF98B1-E033-4DE3-93C0-1ACE8CE0CE4D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{267E95D7-4669-45E4-92D1-E147289593EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267E95D7-4669-45E4-92D1-E147289593EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267E95D7-4669-45E4-92D1-E147289593EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267E95D7-4669-45E4-92D1-E147289593EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8514AE1-FF9A-44F5-BBCE-F38747D10711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8514AE1-FF9A-44F5-BBCE-F38747D10711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8514AE1-FF9A-44F5-BBCE-F38747D10711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8514AE1-FF9A-44F5-BBCE-F38747D10711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EAF98B1-E033-4DE3-93C0-1ACE8CE0CE4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EAF98B1-E033-4DE3-93C0-1ACE8CE0CE4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EAF98B1-E033-4DE3-93C0-1ACE8CE0CE4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EAF98B1-E033-4DE3-93C0-1ACE8CE0CE4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1278A292-A9EF-40C7-8684-29A44D5F61A9}
+	EndGlobalSection
+EndGlobal
