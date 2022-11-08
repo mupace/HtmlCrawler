@@ -60,7 +60,8 @@ public class CrawlerApiController : ControllerBase
         return Ok(JsonConvert.SerializeObject(new CrawledPageModel
         {
             ImageList = imagesRec,
-            WordsWithCounts = wordCounts
+            WordsWithCounts = wordCounts,
+            TotalWords = wordCounts.Any() ? wordCounts.Count() : 0
         }));
     }
     

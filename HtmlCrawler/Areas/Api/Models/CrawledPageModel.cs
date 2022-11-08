@@ -7,5 +7,7 @@ namespace HtmlCrawler.Areas.Api.Models
         public IEnumerable<string> ImageList { get; set; }
 
         public IEnumerable<WordCountModel> WordsWithCounts { get; set; }
+
+        public int TotalWords { get; set; }
     }
 }
