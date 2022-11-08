@@ -47,7 +47,7 @@ namespace HtmlCrawler.Controllers
                 return View(model);
             }
 
-            model.ErrorMessages.Append(await responseMsg.Content.ReadAsStringAsync());
+            model.ErrorMessages = model.ErrorMessages.Append(await responseMsg.Content.ReadAsStringAsync());
 
             return View(model);
         }
