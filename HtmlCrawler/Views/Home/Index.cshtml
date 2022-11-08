@@ -1,0 +1,115 @@
+﻿@using Newtonsoft.Json
+@model HomepageModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Please enter url to get information about</p>
+
+    @using(Html.BeginForm("index", "Home")){
+        @Html.AntiForgeryToken()
+        <div class="col-12">
+            <div class="row">
+                <div class="col-sm-1" style="vertical-align: text-bottom">
+                    <span>Url</span>
+                </div>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(x => x.Url, new
+                    {
+                        @class= "form-control",
+                        placeholder = "Enter full web address"
+                    })
+                </div>
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-success">Get it!</button>
+                </div>
+            </div>
+            <div class="row">
+                @Html.ValidationMessageFor(x => x.Url)
+            </div>
+        </div>
+    }
+    @if (Model.ErrorMessages.Any())
+    {
+        <div class="row">
+            @foreach (var msg in Model.ErrorMessages)
+            {
+                <div class="col-12 alert-danger">
+                    @msg
+                </div>
+            }
+        </div>
+
+
+    }
+    
+    @if (Model.CrawledPage != null)
+    {
+        <div class="row">
+            <div class="col-12">
+                <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+            
+                        @{
+                            var carouselItemCss = "carousel-item active";
+                            foreach (var img in Model.CrawledPage.ImageList)
+                            {
+                                                <div class="@carouselItemCss">
+                                                    <img src="@img" class="d-block w-100">
+                                                </div>
+                                carouselItemCss = "carousel-item";
+                            }
+                        }
+                    
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts
+{
+    @if (Model.CrawledPage != null)
+    {
+        <script>
+            var xValues = @Html.Raw(JsonConvert.SerializeObject(Model.CrawledPage.WordsWithCounts.Select(x => x.Word)));
+            var yValues = @Html.Raw(JsonConvert.SerializeObject(Model.CrawledPage.WordsWithCounts.Select(x => x.Occurance)));
+            var barColors = ["blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue"];
+
+            new Chart("chart", {
+              type: "bar",
+              data: {
+                labels: xValues,
+                datasets: [{
+                  backgroundColor: barColors,
+                  data: yValues
+                }]
+              },
+              options: {
+                legend: {display: false},
+                title: {
+                  display: true,
+                  text: "Most used words"
+                }
+              }
+            });
+        </script>
+    }
+}

@@ -3,8 +3,10 @@ using Operations;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
 builder.Services.AddOperationServices();
+
 
 var app = builder.Build();
 
@@ -21,14 +23,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthorization();
+
 app.MapAreaControllerRoute(
     name: "CrawlerApiArea",
     areaName: "CrawlerApi",
     pattern: "crawlerapi/{controller=CrawlerApi}/{action=CPH}/{url}"
 );
 
-app.UseAuthorization();
-
-app.MapRazorPages();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

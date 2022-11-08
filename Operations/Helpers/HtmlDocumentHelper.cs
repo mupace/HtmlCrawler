@@ -40,7 +40,9 @@ namespace Operations.Helpers
 
             var words = cleanedText.Split(whitespace);
 
-            return words.Select(x => new WordCountModel
+            var distinctWords = words.Distinct(StringComparer.InvariantCultureIgnoreCase).ToList();
+
+            return distinctWords.Select(x => new WordCountModel
             {
                 Word = x,
                 Occurance = words.Count(y => string.Equals(y, x, StringComparison.InvariantCultureIgnoreCase))
