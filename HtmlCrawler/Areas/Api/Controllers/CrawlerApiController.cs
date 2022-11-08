@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using HtmlAgilityPack;
+using HtmlCrawler.Areas.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Operations.Helpers;
 
 namespace HtmlCrawler.Areas.Api.Controllers;
@@ -37,20 +39,29 @@ public class CrawlerApiController : ControllerBase
         }
 
         var web = new HtmlWeb();
+        HtmlDocument htmlDoc;
 
-        var htmlDoc = await web.LoadFromWebAsync(url);
-
-        var txt = htmlDoc.DocumentNode.InnerText;
+        try
+        {
+            htmlDoc = await web.LoadFromWebAsync(url);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message, e);
+            return BadRequest("Cannot load the page");
+        }
 
         var domain = $"{uri.Scheme}://{uri.Host}";
 
         var imagesRec = _htmlDocumentHelper.FindImagesRecursive(htmlDoc.DocumentNode, domain);
 
-        var cleanedText = _htmlDocumentHelper.CleanInnerText(txt);
+        var wordCounts = _htmlDocumentHelper.CountWords(htmlDoc.DocumentNode.InnerText);
 
-        var decoded = WebUtility.HtmlDecode(txt);
-
-        return Ok("ok");
+        return Ok(JsonConvert.SerializeObject(new CrawledPageModel
+        {
+            ImageList = imagesRec,
+            WordsWithCounts = wordCounts
+        }));
     }
     
 }

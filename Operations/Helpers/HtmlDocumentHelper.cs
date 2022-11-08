@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using Models;
 
@@ -41,7 +36,15 @@ namespace Operations.Helpers
 
         public IEnumerable<WordCountModel> CountWords(string innerText)
         {
-            throw new NotImplementedException();
+            var cleanedText = CleanInnerText(innerText);
+
+            var words = cleanedText.Split(whitespace);
+
+            return words.Select(x => new WordCountModel
+            {
+                Word = x,
+                Occurance = words.Count(y => string.Equals(y, x, StringComparison.InvariantCultureIgnoreCase))
+            }).ToList();
         }
 
         private bool HasProtocol(string uri)

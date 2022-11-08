@@ -4,8 +4,8 @@ namespace HtmlCrawler.Areas.Api.Models
 {
     public class CrawledPageModel
     {
-        public List<string> ImageList { get; set; }
+        public IEnumerable<string> ImageList { get; set; }
 
-        public WordCountModel WordCount { get; set; }
+        public IEnumerable<WordCountModel> WordsWithCounts { get; set; }
     }
 }
